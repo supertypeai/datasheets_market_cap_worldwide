@@ -9,6 +9,47 @@ load_dotenv()
 import os
 from supabase import create_client
 
+
+exchanges = {
+    'NYSE': 'us',
+    'Nasdaq - US': 'us',
+    'Euronext': 'eu',
+    'Shanghai Stock Exchange': 'cn',
+    'Japan Exchange Group': 'jp',
+    'Shenzhen Stock Exchange': 'cn',
+    'Hong Kong Exchanges and Clearing': 'hk',
+    'National Stock Exchange of India': 'in',
+    'LSE Group London Stock Exchange': 'gb',
+    'Saudi Exchange (Tadawul)': 'sa',
+    'TMX Group': 'ca',
+    'Deutsche Boerse AG': 'de',
+    'SIX Swiss Exchange': 'ch',
+    'Nasdaq Nordic and Baltics': 'nc',
+    'Korea Exchange': 'kr',
+    'Tehran Stock Exchange': 'ir',
+    'ASX Australian Securities Exchange': 'au',
+    'Taiwan Stock Exchange': 'tw',
+    'Johannesburg Stock Exchange': 'za',
+    'B3 - Brasil Bolsa Balcão': 'br',
+    'Abu Dhabi Securities Exchange': 'ae',
+    'BME Spanish Exchanges': 'es',
+    'Indonesia Stock Exchange': 'id',
+    'Singapore Exchange': 'sg',
+    'The Stock Exchange of Thailand': 'th',
+    'Bolsa Mexicana de Valores': 'mx',
+    'Bursa Malaysia': 'my',
+    'Borsa Istanbul': 'tr',
+    'Iran Fara Bourse Securities Exchange': 'ir',
+    'Tel-Aviv Stock Exchange': 'il'
+}
+
+def get_url(row):
+    country = exchanges.get(row['stock_exchange'])
+    if country:
+        return f'https://flagcdn.com/w20/{country}.webp'
+    else:
+        return ''
+
 month = datetime.now().month
 year = datetime.now().year
 
@@ -54,7 +95,7 @@ data.append({'stock_exchange': 'Indonesia Stock Exchange','market_cap': str(idn_
 df = pd.DataFrame(data)
 df['market_cap'] = df['market_cap'].apply(lambda x: x.replace(',', '') if ',' in x else x).astype(float)
 df = df.sort_values(by='market_cap', ascending=False)
-
+df['country_img_url'] = df.apply(get_url, axis=1)
 df['rank'] = range(1, len(df) + 1)
 
 market_cap_worldwide_json = df.to_dict(orient='records')
