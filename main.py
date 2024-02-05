@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 from supabase import create_client
-
+import cloudscraper
 
 exchanges = {
     'NYSE': 'us',
@@ -46,29 +46,27 @@ exchanges = {
 def get_url(row):
     country = exchanges.get(row['stock_exchange'])
     if country:
-        return f'https://flagcdn.com/w20/{country}.webp'
+        return f'https://flagcdn.com/w40/{country}.webp'
     else:
         return ''
 
 month = datetime.now().month
 year = datetime.now().year
+month_name = calendar.month_name[month].lower()
 
-if month == 12:
-    month_name = calendar.month_name[1].lower()
-    year += 1
-else:
-    month_name = calendar.month_name[month + 1].lower()
 
-market_cap_column = month - 1
+market_cap_column = month - 2
+if market_cap_column == 0:
+  market_cap_column = 12
+
 
 url = f'https://focus.world-exchanges.org/issue/{month_name}-{year}/market-statistics'
-response = requests.get(url)
-soup = BeautifulSoup(response.text, 'html.parser')
 
+scraper = cloudscraper.create_scraper()
+soup = BeautifulSoup(scraper.get(url).text, 'html.parser')
 table = soup.find('table')
 
 data = []
-
 for row in table.find_all('tr'):
     columns = row.find_all('td')
     if len(columns) >= 7:
