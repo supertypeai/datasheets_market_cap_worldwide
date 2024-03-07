@@ -4,8 +4,6 @@ import pandas as pd
 import json
 from datetime import datetime
 import calendar
-from dotenv import load_dotenv
-load_dotenv()
 import os
 from supabase import create_client
 import cloudscraper
@@ -53,6 +51,8 @@ exchanges = {
     'Abu Dhabi Securities Exchange': 'ae',
     'Amman Stock Exchange':'jo',
     'Athens Stock Exchange':'gr',
+    'Belarusian Currency and Stock Exchange':'by',
+    'Bahrain Bourse':'bh',
     'BME Spanish Exchanges': 'es',
     'Borsa Istanbul':'tr',
     'Botswana Stock Exchange':'bw',
@@ -120,20 +120,22 @@ scraper = cloudscraper.create_scraper()
 soup = BeautifulSoup(scraper.get(url).text, 'html.parser')
 table = soup.find('table')
 
+
 indo = False
 data = []
 for row in table.find_all('tr'):
     columns = row.find_all('td')
-    if len(columns) >= 7:
+    if len(columns) >= 4:
         stock_exchange = columns[0].text.strip()
         if stock_exchange == 'Indonesia Stock Exchange':
             indo = True
         market_cap = columns[market_cap_column].text.strip()
         if market_cap != '' and ('Total' not in stock_exchange):
-          data.append({
-              'stock_exchange': stock_exchange,
-              'market_cap': market_cap
-          })
+            data.append({
+            'stock_exchange': stock_exchange,
+            'market_cap': market_cap
+            })
+
 
 if indo is False:
     print('No information regarding Indonesian Stock Exchange in WFE')
