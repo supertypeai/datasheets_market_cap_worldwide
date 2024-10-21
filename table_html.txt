@@ -83,7 +83,7 @@
   </tr>
   <tr height="17">
    <td height="17">
-    B3 - Brasil Bolsa Balc„o
+    B3 - Brasil Bolsa Balc√£o
    </td>
    <td style="text-align: right;">
     928,318.50
