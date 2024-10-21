@@ -161,7 +161,7 @@ if (scrape):
   if (table is not None):
     # Temp writing
     f = open("table_html.txt", "w")
-    f.write(table.text)
+    f.write(table.prettify())
     f.close()
 
 
