@@ -160,13 +160,13 @@ if (scrape):
 
   if (table is not None):
     # Temp writing
-    f = open("table_html.txt", "w")
+    f = open("table_html.txt", "w", encoding='utf-8')
     f.write(table.prettify())
     f.close()
 
 
 # Read the data
-f = open("table_html.txt", "r")
+f = open("table_html.txt", "r", encoding='utf-8')
 html_content = f.read()
 table = BeautifulSoup(html_content, 'html.parser')
 
