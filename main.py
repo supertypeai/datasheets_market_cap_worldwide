@@ -143,7 +143,7 @@ PROXIES = {
 start  = time.time()
 
 # Reading the sys.argv
-if (sys.argv[1] == None):
+if (len(sys.argv) <= 1):
   scrape = True
 else:
   if (sys.argv[1] == "no-scrape"):
