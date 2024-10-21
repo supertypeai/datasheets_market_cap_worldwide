@@ -208,7 +208,7 @@ if (len(html_content) > 0):
   df = df.sort_values(by='market_cap', ascending=False)
   df['country_img_url'] = df.apply(get_url, axis=1)
   df['rank'] = range(1, len(df) + 1)
-  df['updated_on'] = (datetime.now()).strftime("%Y-%m-%d %H:%M:%S")
+  # df['updated_on'] = (datetime.now()).strftime("%Y-%m-%d %H:%M:%S")
 
   market_cap_worldwide_json = df.to_dict(orient='records')
   with open('stock_exchanges_by_market_cap.json', 'w') as json_file:
