@@ -140,6 +140,8 @@ PROXIES = {
     'https': PROXY_URL,
 }
 
+print(f"[URL] URL to fetch: {URL}")
+
 start  = time.time()
 
 # Reading the sys.argv
