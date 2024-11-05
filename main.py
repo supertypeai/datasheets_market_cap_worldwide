@@ -159,7 +159,6 @@ if (scrape):
   soup = BeautifulSoup(response.text, 'html.parser')
   table = soup.find('table')
 
-
   if (table is not None):
     # Temp writing
     f = open("table_html.txt", "w", encoding='utf-8')
