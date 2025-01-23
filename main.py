@@ -129,7 +129,7 @@ month = datetime.now().month
 year = datetime.now().year
 month_name = calendar.month_name[month].lower()
 
-market_cap_column = month - 2
+market_cap_column = (month - 2 + 12) % 12
 if market_cap_column == 0:
   market_cap_column = 12
 
