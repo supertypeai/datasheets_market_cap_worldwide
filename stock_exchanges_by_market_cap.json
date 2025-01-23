@@ -201,7 +201,7 @@
         "stock_exchange": "Taipei Exchange",
         "market_cap": 196604.41,
         "country_img_url": "https://flagcdn.com/w40/tw.webp",
-        "rank": 33
+        "rank": 34
     },
     {
         "stock_exchange": "Bolsa de Comercio de Santiago",
@@ -336,9 +336,9 @@
         "rank": 56
     },
     {
-        "stock_exchange": "Bahrain Bourse",
-        "market_cap": 20746.66,
-        "country_img_url": "https://flagcdn.com/w40/bh.webp",
+        "stock_exchange": "Bolsa Latinoamericana de Valores (Latinex)",
+        "market_cap": 18200.0,
+        "country_img_url": "https://flagcdn.com/w40/pa.webp",
         "rank": 57
     },
     {
